@@ -1,29 +1,28 @@
 "use client";
-
+// $ Import Components
 import MobileNav from "./MobileNav";
 import Navbar from "./Navbar";
 import Logo from "./Logo";
 import Button from "../Button";
-import { useState, useEffect } from "react";
 import MobileNavMenuButton from "./MobileNavMenuButton";
-type Props = {};
 
-function Header({}: Props) {
-  const [headerActive, setHeaderActive] = useState(false);
+// $ Import React Hooks
+import { useState, useEffect } from "react";
+
+// $ Import Custom Hooks
+import useLogin from "@/app/hooks/useLogin";
+import useRegister from "@/app/hooks/useRegister";
+import useScrollEvent from "@/app/hooks/useScrollEvent";
+
+function Header() {
+  const [headerActive, setHeaderActive] = useState<boolean>(false);
   const [openNav, setOpenNav] = useState<boolean>(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      // Detect Scroll Event
-      setHeaderActive(window.scrollY > 50);
-    };
-    // Add Scroll Event Listener
-    window.addEventListener("scroll", handleScroll);
-    // return a cleanup function
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [headerActive]);
+  const { handleLogin } = useLogin();
+  const { handleRegister } = useRegister();
+
+  // $ Handle Navbar Scroll Event
+  useScrollEvent(setHeaderActive);
 
   return (
     <header
@@ -44,7 +43,7 @@ function Header({}: Props) {
           } md:hidden flex flex-col text-white text-center gap-8 w-full bg-primary-200 fixed left-0 top-[124px] text-base uppercase font-medium transition-all`}
         />
         {/* Desktop Navbar - hidden on mobile screens */}
-        <Navbar containerStyles="flex gap-6 hidden md:flex text-white text-base uppercase font-medium tracking-wider" />
+        <Navbar containerStyles="gap-6 hidden md:flex sm:gap-4 text-white text-base uppercase font-medium tracking-wider" />
         {/* Hide and Open menu button */}
 
         {/* Login and Register Button */}
@@ -52,11 +51,13 @@ function Header({}: Props) {
           <Button
             title="Login"
             className="text-white hover:text-accent transition-all text-base uppercase font-medium tracking-wider"
+            handleClick={handleLogin}
           />
 
           <Button
             title="Register"
             className="text-white hover:text-accent transition-all text-base uppercase font-medium tracking-wider"
+            handleClick={handleRegister}
           />
           <MobileNavMenuButton openNav={openNav} setOpenNav={setOpenNav} />
         </div>

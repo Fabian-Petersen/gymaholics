@@ -3,6 +3,9 @@
 import { useSwiper } from "swiper/react";
 import { PiCaretLeftBold, PiCaretRightBold } from "react-icons/pi";
 
+import { motion } from "framer-motion";
+import { fadeIn } from "../lib/variants";
+
 const SwiperNavButtons = ({
   containerStyles,
   btnStyles,
@@ -12,15 +15,22 @@ const SwiperNavButtons = ({
   btnStyles: string;
   iconStyles: string;
 }) => {
+  const swiper = useSwiper();
   return (
-    <div className={`${containerStyles}`}>
-      <button className={`${btnStyles}`}>
+    <motion.div
+      variants={fadeIn("up", 1)}
+      initial="hidden"
+      whileInView={"show"}
+      viewport={{ once: false, amount: 0.2 }}
+      className={`${containerStyles}`}
+    >
+      <button className={`${btnStyles}`} onClick={() => swiper.slidePrev()}>
         <PiCaretLeftBold className={`${iconStyles}`} />
       </button>
-      <button className={`${btnStyles}`}>
+      <button className={`${btnStyles}`} onClick={() => swiper.slideNext()}>
         <PiCaretRightBold className={`${iconStyles}`} />
       </button>
-    </div>
+    </motion.div>
   );
 };
 

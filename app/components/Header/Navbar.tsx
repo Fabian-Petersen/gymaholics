@@ -6,6 +6,7 @@ const links = [
   {
     name: "home",
     target: "home",
+    href: "/home",
     offset: -100,
   },
   {

@@ -1,9 +1,10 @@
+import { useRouter } from "next/navigation";
+
 const useRegister = () => {
-  //   const { login } = useAuth();
-  //   const { setToken } = useToken();
+  const router = useRouter();
 
   const handleRegister = async () => {
-    console.log("login");
+    router.push("/register");
   };
 
   return { handleRegister };

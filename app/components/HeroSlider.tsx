@@ -25,7 +25,8 @@ const HeroSlider = () => {
               viewport={{ once: false, amount: 0.2 }}
               className="h1 text-center lg:text-left mb-2 font-oswald"
             >
-              <span> Where hard</span> work meets success
+              <span className="text-accent"> Where hard</span> work meets
+              success
             </motion.h1>
             <motion.p
               variants={fadeIn("up", 0.6)}

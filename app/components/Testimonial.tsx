@@ -69,7 +69,12 @@ const Testimonial = () => {
         >
           Our Testimonials
         </motion.h2>
-        <div>
+        <motion.div
+          variants={fadeIn("up", 0.6)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: false, amount: 0.2 }}
+        >
           <Swiper
             slidesPerView={1}
             spaceBetween={40}
@@ -112,7 +117,7 @@ const Testimonial = () => {
               );
             })}
           </Swiper>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
